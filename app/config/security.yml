@@ -1,0 +1,28 @@
+security:
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        # Simple example of loading users via Doctrine
+        # To load users from somewhere else: http://symfony.com/doc/current/cookbook/security/custom_provider.html
+        database_users:
+            entity: { class: AppBundle:User, property: username }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            guard:
+                authenticators:
+                    - app.form_login_authenticator
+                # by default, use the start() function from FormLoginAuthenticator
+                entry_point: app.form_login_authenticator
+            logout:
+                path: /logout
+    access_control:
+        - { path: ^/admin, roles: ROLE_USER }

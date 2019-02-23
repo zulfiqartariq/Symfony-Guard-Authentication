@@ -1,0 +1,16 @@
+{# app/Resources/views/security/login.html.twig #}
+{# ... you will probably extends your base template, like base.html.twig #}
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if error %}
+    <div>{{ error.messageKey }}</div>
+{% endif %}
+
+This is my login form
+
+{{ form_start(form) }}
+         {{ form_row(form._username) }}
+        {{ form_row(form._password) }}
+<input type="submit" value="submut"/>
+{{ form_end(form) }}
+{% endblock %}
